@@ -66,7 +66,7 @@ public class FireVotifier extends JavaPlugin {
         vote.setServiceName(args[1]);
         vote.setUsername(args[0]);
         vote.setAddress("127.0.0.1");
-        vote.setTimeStamp(""); //Todo
+        vote.setTimeStamp(String.valueOf(System.currentTimeMillis() / 1000));
         return vote;
     }
 
