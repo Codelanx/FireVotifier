@@ -18,6 +18,7 @@ package com.codelanx.firevotifier;
 
 import com.vexsoftware.votifier.Votifier;
 import com.vexsoftware.votifier.model.Vote;
+import com.vexsoftware.votifier.model.VotifierEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -38,6 +39,7 @@ public class FireVotifier extends JavaPlugin {
             this.sendMessage(sender, "Usage: /fakevote <username> <service>");
         }
         Vote v = this.buildVote(args);
+        //Call listeners
         Votifier.getInstance().getListeners().forEach(l -> {
             try {
                 l.voteMade(v);
@@ -45,6 +47,8 @@ public class FireVotifier extends JavaPlugin {
                 this.sendMessage(sender, "Uncaught exception from listener '%s', from Plugin '%s'", l.getClass().getSimpleName(), this.getProvider(l.getClass()));
             }
         });
+        //Call bukkit event
+        this.getServer().getPluginManager().callEvent(new VotifierEvent(v));
         return true;
     }
 
