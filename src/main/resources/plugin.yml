@@ -6,3 +6,6 @@ website: ${website}
 main: ${project.groupId}.${project.artifactId}.${project.name}
 prefix: ${prefix}
 depend: [Votifier]
+commands:
+  fakevote:
+    description: Fires a fake vote
